@@ -1,13 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[4]:
-
-
-# Install required packages in Colab
-#pip install flask pyngrok pandas tensorflow
-
-# Import libraries
 import tensorflow as tf
 import numpy as np
 import pickle
@@ -18,16 +8,9 @@ import pandas as pd
 import re
 import os
 import shutil
-from pyngrok import ngrok
-from threading import Thread
-#from google.colab import files
 
 # Enable eager execution
 tf.compat.v1.enable_eager_execution()
-
-# Upload files
-#print("Please upload tokenizer.pkl and fine_tuned_lstm_model.keras")
-#uploaded = files.upload()
 
 # Load tokenizer and model
 with open('tokenizer.pkl', 'rb') as handle:
@@ -104,7 +87,8 @@ os.makedirs('temp')
 if not os.path.exists('static'):
     os.makedirs('static')
 
-# Write index.html with enhanced styles
+# Write your templates (index.html, result_doughnut.html, predict.html) here
+# [Copy the HTML from your previous version here]
 with open('temp/index.html', 'w') as f:
     f.write('''<!DOCTYPE html>
 <html lang="en">
@@ -214,9 +198,9 @@ with open('temp/index.html', 'w') as f:
         <a href="/predict" class="nav-link">Analyze a Single Review</a>
     </div>
 </body>
-</html>''')
+</html>''')  # Replace with your actual index.html
 
-# Write result_doughnut.html with adjusted layout
+
 with open('temp/result_doughnut.html', 'w') as f:
     f.write('''<!DOCTYPE html>
 <html lang="en">
@@ -461,9 +445,9 @@ with open('temp/result_doughnut.html', 'w') as f:
         document.getElementById('barBtn').addEventListener('click', () => updateChart('bar'));
     </script>
 </body>
-</html>''')
+</html>''') # Replace with your actual result_doughnut.html
 
-# Write predict.html with enhanced styles
+
 with open('temp/predict.html', 'w') as f:
     f.write('''<!DOCTYPE html>
 <html lang="en">
@@ -592,34 +576,9 @@ with open('temp/predict.html', 'w') as f:
         <a href="/" class="back-link">Back to CSV Upload</a>
     </div>
 </body>
-</html>''')
+</html>''')  # Replace with your actual predict.html
 
-# Upload background image
-#print("Please upload your background image (e.g., background.jpg)")
-#uploaded = files.upload()
-#for filename in uploaded.keys():
-    #os.rename(filename, f'static/{filename}')
-
-# Kill any existing ngrok processes
-get_ipython().system('pkill ngrok')
-
-# Set up ngrok with your authtoken
-ngrok.set_auth_token('24vMdacbH9kybJYi8rRPMwcbuB7_5SkxxiRpxJrPugZ7cfkGS')  # Replace with your ngrok authtoken
-
-# Start Flask in a separate thread
-def run_app():
-    app.run(port=5000)
-
-thread = Thread(target=run_app)
-thread.start()
-
-# Create a public URL with ngrok
-public_url = ngrok.connect(5000)
-print(f"Flask app is running at: {public_url}")
-
-
-# In[ ]:
-
-
-
-
+# For local testing only; Render uses gunicorn
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
