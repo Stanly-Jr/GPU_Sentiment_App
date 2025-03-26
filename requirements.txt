@@ -119,6 +119,7 @@ gradio_client==1.8.0
 greenlet @ file:///C:/b/abs_a6c75ie0bc/croot/greenlet_1702060012174/work
 groovy==0.1.2
 grpcio==1.71.0
+gunicorn==23.0.0
 h11 @ file:///C:/b/abs_1czwoyexjf/croot/h11_1706652332846/work
 h5py @ file:///C:/b/abs_c4ha_1xv14/croot/h5py_1715094776210/work
 HeapDict @ file:///Users/ktietz/demo/mc3/conda-bld/heapdict_1630598515714/work
